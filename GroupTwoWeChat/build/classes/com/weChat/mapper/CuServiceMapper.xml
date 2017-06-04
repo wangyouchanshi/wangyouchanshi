@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weChat.mapper.CuServiceMapper">
+
+	<select id="getSelfDefinationalMenu" resultType="com.weChat.entity.TreeGrid">
+		select * from wc_menu_button
+	</select>
+	
+
+
+</mapper>
+	<!-- <resultMap type="orders" id="orderUserResultMap">
+		<id column="id" property="id" />
+		<result column="note" property="note" />
+		<result column="createtime" property="createtime" />
+		<result column="userId" property="userId" />
+		下边完成关联信息的映射
+		association：用于对关联信息映射到单个pojo
+		property：要将关联信息映射到orders的哪个属性中
+		javaType：关联信息映射到orders的属性的类型，是user的类型
+		
+		<association property="user" javaType="user" >
+			id：关联信息的唯 一标识 
+			property： 要映射到user的哪个属性中
+			<id column="id" property="id" />
+			<result column="username" property="username" />
+			<result column="password" property="password" />
+			<result column="birthday" property="birthday" />
+		</association>
+	</resultMap>
+	一对多 resultMap配置
+	<resultMap type="orders" id="orderAndItemsResultMap">
+		<id column="id" property="id" />
+		<result column="note" property="note" />
+		<result column="createtime" property="createtime" />
+		<result column="userId" property="userId" />
+		<collection property="list" ofType="com.baidu.entity.Items"  >
+			<id column="item_id" property="id" />
+			<result column="items_name" property="item_name" />
+		</collection>
+	
+	</resultMap> -->

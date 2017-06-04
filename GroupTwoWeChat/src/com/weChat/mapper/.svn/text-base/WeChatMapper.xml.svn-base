@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weChat.mapper.WeChatMapper">
+
+	
+	<select id="findMenu" resultType="com.weChat.entity.Menu" >
+		select * from wc_menu
+	</select>
+	
+	<insert id="insertMessage" parameterType="map" >
+		insert into wc_message set ToUserName = #{ToUserName} , FromUserName=#{FromUserName},CreateTime='${CreateTime}',MsgType=#{MsgType}
+		,MsgId='${MsgId}',Content=#{Content}
+	</insert>
+	
+	<select id="findMenuButton" resultType="menuOfMe" > 
+	
+		SELECT a.*,b.type,b.msg FROM wc_menu_button a LEFT JOIN wc_button_type b ON a.type_id = b.id
+	
+	</select>
+	
+	<select id="getCardById" resultType="card"  > 
+		SELECT * FROM wc_card
+	</select>
+	
+	<select id="getBaseInfoById" parameterType="int" resultType="baseInfo" >
+		SELECT * FROM wc_base_info WHERE base_info_id = #{_parameter}
+	</select>
+	
+	<select id="getGrouponById" parameterType="int" resultType="groupon">
+		SELECT b.deal_detail FROM wc_card a,wc_groupon b WHERE a.groupon_id=b.groupon_id AND b.groupon_id =   #{_parameter}
+	</select>
+	
+	<update id="updateCardId" parameterType="card" >
+		update wc_card set card_id=#{card_id} where id = #{id}
+	 </update>
+	
+	
+	<insert id="addPicStore" parameterType="picStore" >
+		insert into wc_pic_store set media_id = #{media_id} , url = #{url} 
+		,type=#{type},createTime = #{createTime},pic_name=#{pic_name}
+	</insert>
+	
+	<insert id="addBaseInfo" parameterType="baseInfo" useGeneratedKeys="true" keyProperty="base_info_id" >
+		insert into wc_base_info set brand_name = #{brand_name},logo_url = #{logo_url} ,title = #{title} ,sub_title = #{sub_title}
+		,notice = #{notice} ,service_phone = #{service_phone} ,description = #{description},
+		custom_url = #{custom_url} ,promotion_url = #{promotion_url}
+	</insert>
+	
+	<insert id="addGroupon"  parameterType="groupon" useGeneratedKeys="true" keyProperty="groupon_id" >
+		insert into wc_groupon set deal_detail = #{deal_detail} 
+	</insert>
+	
+</mapper>
+
+<!-- <resultMap type="orders" id="orderUserResultMap">
+		<id column="id" property="id" />
+		<result column="note" property="note" />
+		<result column="createtime" property="createtime" />
+		<result column="userId" property="userId" />
+		下边完成关联信息的映射
+		association：用于对关联信息映射到单个pojo
+		property：要将关联信息映射到orders的哪个属性中
+		javaType：关联信息映射到orders的属性的类型，是user的类型
+		
+		<association property="user" javaType="user" >
+			id：关联信息的唯 一标识 
+			property： 要映射到user的哪个属性中
+			<id column="id" property="id" />
+			<result column="username" property="username" />
+			<result column="password" property="password" />
+			<result column="birthday" property="birthday" />
+		</association>
+	</resultMap>
+	一对多 resultMap配置
+	<resultMap type="orders" id="orderAndItemsResultMap">
+		<id column="id" property="id" />
+		<result column="note" property="note" />
+		<result column="createtime" property="createtime" />
+		<result column="userId" property="userId" />
+		<collection property="list" ofType="com.baidu.entity.Items"  >
+			<id column="item_id" property="id" />
+			<result column="items_name" property="item_name" />
+		</collection>
+	
+	</resultMap> -->
+
